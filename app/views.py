@@ -292,13 +292,49 @@ def profile_create(request):
 def seeker_profile(request):
     
     user=User.objects.get(email=request.user)
+    #check filed is created or not
     if not Seeker_Personal_Information.objects.filter(user=user).exists():
         return render(request, 'seeker-profile-create.html')
 
     personal_info=Seeker_Personal_Information.objects.get(user=user)
     professional_info=Seeker_Professional_Information.objects.get(user=user)
     education_info=Seeker_Education.objects.get(user=user)
+    
+    if request.method == "POST":
+        if user.user_type == "Seeker":
 
+            #professional Summary Field
+            desc= request.POST.get('desc')
+            notice_period= request.POST.get('notice_period')
+            key_skill= request.POST.get('key_skill')
+            project= request.POST.get('project')
+            experience_level= request.POST.get('experience_level')
+            cv= request.FILES.get('cv')
+
+            #Education Detail
+            clg_course_name= request.POST.get('clg_course_name')
+            clg_specialization= request.POST.get('clg_specialization')
+            clg_name= request.POST.get('clg_name')
+            clg_grading_system= request.POST.get('clg_grading_system')
+            clg_grad= request.POST.get('clg_grad')
+            clg_duration_from= request.POST.get('clg_duration_from')
+            clg_duration_to= request.POST.get('clg_duration_to')
+            _10_school_name= request.POST.get('_10_school_name')
+            _10_grading_system= request.POST.get('_10_grading_system')
+            _10_grad= request.POST.get('_10_grad')
+            _12_school_name= request.POST.get('_12_school_name')
+            _12_specialization= request.POST.get('_12_specialization')
+            _12_grading_system= request.POST.get('_12_grading_system')
+            _12_grad= request.POST.get('_12_grad')
+
+            #Personal Detail
+            dob=request.POST.get('dob')
+            gender=request.POST.get('gender')
+            contact=request.POST.get('contact')
+            profile_pic=request.FILES.get('profile_pic')
+
+
+    
     
     return render(request,'seeker-profile.html',
                   {'personal_info':personal_info,

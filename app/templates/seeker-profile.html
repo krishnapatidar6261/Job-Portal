@@ -164,7 +164,7 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Skills (Comma Seprate)</label>
-                  <input type="text" name="key_skill" id="fname" class="form-control" value="{{professional_info.key_skills}}" placeholder="Skills (Comma Seprate)" required>
+                  <input type="text" name="key_skill" id="fname" class="form-control" value="{{professional_info.key_skill  }}" placeholder="Skills (Comma Seprate)" required>
                 </div>
               </div> 
               <div class="row form-group">
@@ -175,7 +175,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Upload Resum</label>{{professional_info.cv.url}}
+                  <label class="text-black" for="fname">Upload Resum</label>{{professional_info.cv.name}}
                   <a href="{{professional_info.cv.url}}" download="your_resume.pdf">Download Resume</a>
 
                   <input type="file" name="cv" id="fname" class="form-control" accept=".pdf" required>
@@ -404,58 +404,96 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">10th School Name</label>
-                  <input type="text" name="_10_school_name" id="fname" class="form-control" value="{{ education_info.st_10_school_name }}" placeholder="College Name" required>
+                  <input type="text" name="_10_school_name" id="fname" class="form-control" value="{{ education_info.st_10_school_name }}" placeholder="10th School Name" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Grad Type</label>
+                  {% if education_info.st_10_grading_system == 'Percentage' %}
+                  <select  name="_10_grading_system"  class="form-control" required>
+                    <option value="" selected disabled>Select Grad Type</option>
+                    <option value="Percentage" selected>Percentage</option>
+                    <option value="GPA">GPA</option>
+                  </select>
+                  {% elif education_info.st_10_grading_system == 'GPA' %}
                   <select  name="_10_grading_system"  class="form-control" required>
                     <option value="" selected disabled>Select Grad Type</option>
                     <option value="Percentage">Percentage</option>
-                    <option value="GPA">GPA</option>
+                    <option value="GPA" selected>GPA</option>
                   </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">GPA/Percent</label>
-                  <input type="number" name="_10_grad" id="fname" min="1" max="100" class="form-control" placeholder="GPA/Percent" required>
+                  <input type="number" name="_10_grad" id="fname" min="1" max="100" value="{{ education_info.st_10_grad }}"  class="form-control" placeholder="GPA/Percent" required>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">12th School Name</label>
-                  <input type="text" name="_12_school_name" id="fname" class="form-control" placeholder="College Name" required>
+                  <input type="text" name="_12_school_name" id="fname" class="form-control" value="{{ education_info.st_12_school_name }}" placeholder="12th School Name" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Specialization</label>
+                  {% if education_info.st_12_specialization == "Mathematics" %}
                   <select  name="_12_specialization"  class="form-control" required>
-                    <option value="" selected disabled>Select specialization</option>
-                    <option value="Mathematics">Mathematics</option>
+                    <option value="Mathematics" selected>Mathematics</option>
                     <option value="Biology">Biology</option>
                     <option value="Commerce">Commerce</option>
                     <option value="Arts">Arts</option>
                    
                   </select>
+                  {% elif education_info.st_12_specialization == "Biology" %}
+                  <select  name="_12_specialization"  class="form-control" required>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Biology" selected>Biology</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts">Arts</option>
+                   
+                  </select>
+                  {% elif education_info.st_12_specialization == "Commerce" %}
+                  <select  name="_12_specialization"  class="form-control" required>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Commerce" selected>Commerce</option>
+                    <option value="Arts">Arts</option>
+                   
+                  </select>
+                  {% elif education_info.st_12_specialization == "Arts" %}
+                  <select  name="_12_specialization"  class="form-control" required>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts" selected>Arts</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Grad Type</label>
+                  {% if education_info.st_12_grading_system == "Percentage" %}
                   <select  name="_12_grading_system"  class="form-control" required>
-                    <option value="" selected disabled>Select Grad Type</option>
-                    <option value="Percentage">Percentage</option>
-                    <option value="GPA">GPA</option>
+                    <option value="Percentage" selected>Percentage</option>
+                    <option value="GPA" >GPA</option>
                   </select>
+                  {% elif education_info.st_12_grading_system == "GPA" %}
+                  <select  name="_12_grading_system"  class="form-control" required>
+                    <option value="Percentage">Percentage</option>
+                    <option value="GPA" selected>GPA</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">GPA/Percent</label>
-                  <input type="number" name="_12_grad" id="fname" min="1" max="100" class="form-control" placeholder="GPA/Percent" required>
+                  <input type="number" name="_12_grad" id="fname" min="1" max="100" value="{{education_info.st_12_grad}}" class="form-control" placeholder="GPA/Percent" required>
                 </div>
               </div>
                 <div class="row form-group">
