@@ -289,9 +289,10 @@ def profile_create(request):
         
     return render(request, 'seeker-profile-create.html')
     
-def seeker_profile(request):
+def profile(request):
     
     user=User.objects.get(email=request.user)
+
     #check filed is created or not
     if not Seeker_Personal_Information.objects.filter(user=user).exists():
         return render(request, 'seeker-profile-create.html')
@@ -333,11 +334,72 @@ def seeker_profile(request):
             contact=request.POST.get('contact')
             profile_pic=request.FILES.get('profile_pic')
 
+            print(dob)
+            print(clg_duration_from)
+            print(clg_duration_to)
+    
+            print(personal_info.dob)
+            print(education_info.clg_duration_from)
+            print(education_info.clg_duration_to)
+
+
+            personal_info.dob=dob
+            personal_info.gender=gender
+            personal_info.contact=contact
+
+            try:
+                personal_info.profile_pic=profile_pic.url
+            except Exception as e:
+                print(e)
+                pass
+            personal_info.save()
+
+            #update education detail
+            education_info.clg_course_name=clg_course_name
+            education_info.clg_specialization=clg_specialization
+            education_info.clg_name=clg_name
+            education_info.clg_grading_system=clg_grading_system
+            education_info.clg_grad=clg_grad
+            education_info.clg_duration_from=clg_duration_from
+            education_info.clg_duration_to=clg_duration_to
+            education_info.st_10_school_name=_10_school_name
+            education_info.st_10_grading_system=_10_grading_system
+            education_info.st_10_grad=_10_grad
+            education_info.st_12_school_name=_12_school_name
+            education_info.st_12_specialization=_12_specialization
+            education_info.st_12_grading_system=_12_grading_system
+            education_info.st_12_grad=_12_grad
+
+            education_info.save()
+
+            # profession information update
+
+            professional_info.desc= desc
+            professional_info.notice_period= notice_period
+            professional_info.key_skill= key_skill
+            professional_info.project= project
+            professional_info.experience_level= experience_level
+            try:
+                professional_info.cv= cv.url
+            
+            except:
+                pass
+
+            professional_info.save()
+
+            msg="Profile Update Successfully"
+
+            data={  'personal_info':personal_info,
+                    'professional_info':professional_info,
+                    'education_info':education_info,
+                    'msg': msg}
+
+            return render(request,'seeker-profile.html',data)
 
     
-    
-    return render(request,'seeker-profile.html',
-                  {'personal_info':personal_info,
-                   'professional_info':professional_info,
-                   'education_info':education_info}
-                )
+    data={  'personal_info':personal_info,
+            'professional_info':professional_info,
+            'education_info':education_info,
+            }
+
+    return render(request,'seeker-profile.html',data)

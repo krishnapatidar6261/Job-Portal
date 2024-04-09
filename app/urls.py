@@ -18,7 +18,7 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change-password'),
 
     path('profile-create/', views.profile_create, name='profile-create'),
-    path('profile/', views.seeker_profile, name='profile'),
+    path('profile/', views.profile, name='profile'),
 
     
 ]
