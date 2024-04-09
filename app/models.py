@@ -44,8 +44,8 @@ class Seeker_Education(models.Model):
     clg_name= models.TextField()
     clg_grading_system= models.TextField(choices=grading_choice)
     clg_grad=models.TextField()
-    clg_duration_from= models.TextField()
-    clg_duration_to= models.TextField()
+    clg_duration_from= models.DateField(default='2000-01-01')
+    clg_duration_to= models.DateField(default='2000-01-01')
 
     _10_school_name= models.TextField()
     _10_grading_system= models.TextField(choices=grading_choice)

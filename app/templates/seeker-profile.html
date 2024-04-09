@@ -16,7 +16,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">Complete Your Profile</h1>
+            <h1 class="text-white font-weight-bold">Update Your Profile</h1>
             <div class="custom-breadcrumbs">
               <a href="#">Home</a> <span class="mx-2 slash">/</span>
               <span class="text-white"><strong>Profile </strong></span>
@@ -35,7 +35,7 @@
                     <div class="border p-2 d-inline-block mr-3 rounded">
                     <form action="{% url 'profile' %}" method ="POST" enctype='multipart/form-data'>
 
-                      <img src="{% static 'images/job_logo_5.jpg'%}" alt="Image">
+                      <img src="{{personal_info.profile_pic.url}}" width='150' height='150' alt="Image">
                     </div>
                     <div>
                       <h2>Product Designer</h2>
@@ -66,49 +66,120 @@
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="message">Profile Summary</label> 
-                  <textarea name="desc" id="message" cols="30" rows="3" class="form-control" placeholder="Write your Summary here..." required></textarea>
+                  <textarea name="desc" id="message" cols="30" rows="3" class="form-control" placeholder="Write your Summary here..." required>{{professional_info.desc}}</textarea>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Experience Level</label>
+                  {% if professional_info.experience_level == "Fresher" %}
                   <select  name="experience_level"  class="form-control" required>
-                    <option value="Fresher">Fresher</option>
+                    <option value="Fresher" selected>Fresher</option>
                     <option value="6 Month">6 Month</option>
                     <option value="1 Year+">1 Year+</option>
                     <option value="3 Year+">3 Year+</option>
                     <option value="More then 5">More then 5</option>
                   </select>
+                  {% elif professional_info.experience_level == "6 Month" %}
+                  <select  name="experience_level"  class="form-control" required>
+                    <option value="Fresher">Fresher</option>
+                    <option value="6 Month" selected>6 Month</option>
+                    <option value="1 Year+">1 Year+</option>
+                    <option value="3 Year+">3 Year+</option>
+                    <option value="More then 5">More then 5</option>
+                  </select>
+                  {% elif professional_info.experience_level == "1 Year+" %}
+                  <select  name="experience_level"  class="form-control" required>
+                    <option value="Fresher">Fresher</option>
+                    <option value="6 Month">6 Month</option>
+                    <option value="1 Year+" selected>1 Year+</option>
+                    <option value="3 Year+">3 Year+</option>
+                    <option value="More then 5">More then 5</option>
+                  </select>
+                  {% elif professional_info.experience_level == "3 Year+" %}
+                  <select  name="experience_level"  class="form-control" required>
+                    <option value="Fresher">Fresher</option>
+                    <option value="6 Month">6 Month</option>
+                    <option value="1 Year+">1 Year+</option>
+                    <option value="3 Year+" selected>3 Year+</option>
+                    <option value="More then 5">More then 5</option>
+                  </select>
+                  {% elif professional_info.experience_level == "More then 5" %}
+                  <select  name="experience_level"  class="form-control" required>
+                    <option value="Fresher">Fresher</option>
+                    <option value="6 Month">6 Month</option>
+                    <option value="1 Year+">1 Year+</option>
+                    <option value="3 Year+">3 Year+</option>
+                    <option value="More then 5" selected>More then 5</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname" >Notice Period</label>
+                  {% if professional_info.notice_period == "Immediate" %}
                   <select  name="notice_period" required class="form-control">
-                    <option value="Immediate">Immediate</option>
+                    <option value="Immediate" selected>Immediate</option>
                     <option value="Less then 15">Less then 15</option>
                     <option value="1 Month">1 Month</option>
                     <option value="2 Month">2 Month</option>
                     <option value="More Then 2 Month">More Then 2 Month</option>
                   </select>
+                  {% elif professional_info.notice_period == "Less then 15" %}
+                  <select  name="notice_period" required class="form-control">
+                    <option value="Immediate">Immediate</option>
+                    <option value="Less then 15" selected>Less then 15</option>
+                    <option value="1 Month">1 Month</option>
+                    <option value="2 Month">2 Month</option>
+                    <option value="More Then 2 Month">More Then 2 Month</option>
+                  </select>
+                  {% elif professional_info.notice_period == "1 Month" %}
+                  <select  name="notice_period" required class="form-control">
+                    <option value="Immediate">Immediate</option>
+                    <option value="Less then 15">Less then 15</option>
+                    <option value="1 Month" selected>1 Month</option>
+                    <option value="2 Month">2 Month</option>
+                    <option value="More Then 2 Month">More Then 2 Month</option>
+                  </select>
+                  {% elif professional_info.notice_period == "2 Month" %}
+                  <select  name="notice_period" required class="form-control">
+                    <option value="Immediate">Immediate</option>
+                    <option value="Less then 15">Less then 15</option>
+                    <option value="1 Month">1 Month</option>
+                    <option value="2 Month" selected>2 Month</option>
+                    <option value="More Then 2 Month">More Then 2 Month</option>
+                  </select>
+                  {% elif professional_info.notice_period == "More Then 2 Month" %}
+                  <select  name="notice_period" required class="form-control">
+                    <option value="Immediate">Immediate</option>
+                    <option value="Less then 15">Less then 15</option>
+                    <option value="1 Month">1 Month</option>
+                    <option value="2 Month">2 Month</option>
+                    <option value="More Then 2 Month" selected>More Then 2 Month</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Skills (Comma Seprate)</label>
-                  <input type="text" name="key_skill" id="fname" class="form-control" placeholder="Skills (Comma Seprate)" required>
+                  <input type="text" name="key_skill" id="fname" class="form-control" value="{{professional_info.key_skills}}" placeholder="Skills (Comma Seprate)" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="message">Project Detail</label> 
-                  <textarea name="project" id="message" cols="30" rows="3" class="form-control" placeholder="Write your Project Details here..." required></textarea>
+                  <textarea name="project" id="message" cols="30" rows="3" class="form-control" placeholder="Write your Project Details here..." required>{{professional_info.project}}</textarea>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Upload Resum</label>
+                  <label class="text-black" for="fname">Upload Resum</label>{{professional_info.cv.url}}
+                  <a href="{{professional_info.cv.url}}" download="your_resume.pdf">Download Resume</a>
+
                   <input type="file" name="cv" id="fname" class="form-control" accept=".pdf" required>
+
                 </div>
               </div>
             </div>
@@ -131,24 +202,37 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Gender</label>
+                  {% if personal_info.gender == "Male" %}
+                  <select  name="gender"  class="form-control" required>
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif personal_info.gender == "Female" %}
+                  <select  name="gender"  class="form-control" required>
+                    <option value="Male">Male</option>
+                    <option value="Female" selected>Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif personal_info.gender == "Other" %}
                   <select  name="gender"  class="form-control" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                   
+                    <option value="Other" selected>Other</option>
                   </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Phone</label>
-                  <input type="number" name="contact" id="fname" class="form-control" placeholder="Phone" required>
+                  <input type="number" name="contact" id="fname" value="{{personal_info.contact}}" class="form-control" placeholder="Phone" required>
                 </div>
               </div> 
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">DOB</label>
-                  <input type="date" id="fname" name="dob" class="form-control" placeholder="Date Of Birth">
+                  <input type="date" id="fname" name="dob"  value="{{ personal_info.dob|date:'Y-m-d' }}" class="form-control" placeholder="Date Of Birth">
                 </div>
               </div>
 
@@ -167,14 +251,14 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Course Name</label>
-                  <input type="text" name="clg_course_name" id="fname" class="form-control" placeholder="Course Name" required>
+                  <input type="text" name="clg_course_name" id="fname" value="{{education_info.clg_course_name}}" class="form-control" placeholder="Course Name" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Specialization</label>
+                  {% if education_info.clg_specialization == "Data Science" %}
                   <select  name="clg_specialization"  class="form-control" required>
-                    <option value="" selected disabled>Select specialization</option>
                     <option value="Data Science">Data Science</option>
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
@@ -185,38 +269,128 @@
                     <option value="Mathematics ">Mathematics </option>
                     <option value="Other ">Other </option>
                   </select>
+                  {% elif education_info.clg_specialization == "Cybersecurity" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity" selected>Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Electrical Engineering ">Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  {% elif education_info.clg_specialization == "Web Development" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development" selected>Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Electrical Engineering ">Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  {% elif education_info.clg_specialization == "Biomedical Engineering" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering" selected>Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Electrical Engineering ">Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  {% elif education_info.clg_specialization == "Biology" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology" selected>Biology </option>
+                    <option value="Electrical Engineering ">Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  
+                  {% elif education_info.clg_specialization == "Electrical Engineering" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Electrical Engineering" selected>Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  {% elif education_info.clg_specialization == "Mathematics" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics" selected>Mathematics </option>
+                    <option value="Other ">Other </option>
+                  </select>
+                  {% elif education_info.clg_specialization == "Other" %}
+                  <select  name="clg_specialization"  class="form-control" required>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                    <option value="Biology ">Biology </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Electrical Engineering ">Electrical Engineering </option>
+                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Other" selected>Other</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">College Name</label>
-                  <input type="text" name="clg_name" id="fname" class="form-control" placeholder="College Name" required>
+                  <input type="text" name="clg_name" id="fname" value="{{ education_info.clg_name}}" class="form-control" placeholder="College Name" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Grad Type</label>
+                  {% if education_info.clg_grading_system == "Percentage" %}
                   <select  name="clg_grading_system"  class="form-control" required>
-                    <option value="" selected disabled>Select Grad Type</option>
-                    <option value="Percentage">Percentage</option>
-                    <option value="GPA">GPA</option>
+                    <option value="Percentage" selected>Percentage</option>
+                    <option value="GPA" >GPA</option>
                   </select>
+                  {% elif education_info.clg_grading_system == "GPA" %}
+                  <select  name="clg_grading_system"  class="form-control" required>
+                    <option value="Percentage">Percentage</option>
+                    <option value="GPA" selected>GPA</option>
+                  </select>
+                  {% endif %}
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">GPA/Percent</label>
-                  <input type="number" name="clg_grad" id="fname" min="1" max="100" class="form-control" placeholder="GPA/Percent" required>
+                  <input type="number" name="clg_grad" id="fname" value="{{ education_info.clg_grad}}" min="1" max="100" class="form-control" placeholder="GPA/Percent" required>
                 </div>
               </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">From</label>
-                  <input type="date" name="clg_duration_from" id="fname"  class="form-control" placeholder="From" required>
+                  <input type="date" name="clg_duration_from" id="fname" value="{{ education_info.clg_duration_from|date:'Y-m-d' }}" class="form-control" placeholder="From" required>
                 </div>
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">To</label>
-                  <input type="date" name="clg_duration_to" id="fname" class="form-control" placeholder="To" required>
+                  <input type="date" name="clg_duration_to" id="fname" value="{{ education_info.clg_duration_to|date:'Y-m-d' }}" class="form-control" placeholder="To" required>
                 </div>
               </div> 
 
@@ -230,7 +404,7 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">10th School Name</label>
-                  <input type="text" name="_10_school_name" id="fname" class="form-control" placeholder="College Name" required>
+                  <input type="text" name="_10_school_name" id="fname" class="form-control" value="{{ education_info.st_10_school_name }}" placeholder="College Name" required>
                 </div>
               </div> 
               <div class="row form-group">
@@ -291,9 +465,6 @@
                 </div>
               </div>
             </div>
-            
-  
-          
           </div>
   
       </div>

@@ -9,6 +9,7 @@ import random
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import *
+from itertools import chain
 
 #we use Additionally Filed so we need to import and naming as usermodel
 User = get_user_model()
@@ -81,14 +82,14 @@ def login(request):
             return render(request, 'login.html',{"msg": msg})
         
         else:
+            auth_login(request,user)
             if user.user_type=="Seeker":
+                user_instance=User.objects.get(email=request.user)
 
-                if user.last_login is None:
-                    auth_login(request,user)
-                    return render(request,'seeker-profile.html',{'user': user})
+                if not Seeker_Personal_Information.objects.filter(user=user_instance).exists():
+                    
+                    return render(request,'seeker-profile-create.html',{'user': user})
                 
-                auth_login(request,user)
-
                 return render(request,'index.html')
             
             elif user.user_type == "Company":
@@ -285,5 +286,22 @@ def profile_create(request):
         
         else:
             return render(request,'HR-profile.html')
-    return render(request, 'seeker-profile.html')
+        
+    return render(request, 'seeker-profile-create.html')
     
+def seeker_profile(request):
+    
+    user=User.objects.get(email=request.user)
+    if not Seeker_Personal_Information.objects.filter(user=user).exists():
+        return render(request, 'seeker-profile-create.html')
+
+    personal_info=Seeker_Personal_Information.objects.get(user=user)
+    professional_info=Seeker_Professional_Information.objects.get(user=user)
+    education_info=Seeker_Education.objects.get(user=user)
+
+    
+    return render(request,'seeker-profile.html',
+                  {'personal_info':personal_info,
+                   'professional_info':professional_info,
+                   'education_info':education_info}
+                )
