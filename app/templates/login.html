@@ -1,0 +1,83 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <meta charset="utf-8">
+  
+  </head>
+  <body id="top">
+
+      <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('{% static 'images/hero_1.jpg'%}');" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">Login</h1>
+            <div class="custom-breadcrumbs">
+              <a href="#">Home</a> <span class="mx-2 slash">/</span>
+              <span class="text-white"><strong>Log In</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5">
+            <h2 class="mb-4">Login To JobBoard</h2>
+            <form action="{% url 'login' %}", method="POST" class="p-4 border rounded">
+              {% if msg %}
+              <span style="color:red;">{{ msg }} </span><br>
+              {% endif %}
+                {% csrf_token %}
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Email</label>
+                  <input type="email" name="email" id="fname" class="form-control" placeholder="Email address" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Password</label>
+                  <input type="password" name="pwd" id="fname" class="form-control" placeholder="Password" required>
+                </div>
+              </div>
+              
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Login" class="btn px-4 btn-primary text-white">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <a href="{% url 'forgot-password' %}" style="color:blue;">Forgot Password?</a>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12"><span style="color:red;">If You Dont Have a Account</span>
+                  <a href="{% url 'register' %}"><input type="Button" value="Register" class="btn px-4 btn-danger text-white"></a>
+                </div>
+              </div>
+
+            </form>
+            
+          </div>
+          
+      </div>
+    </section>
+    
+   
+  </div>
+
+   
+   
+     
+  </body>
+</html>
+{% endblock %}
