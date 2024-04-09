@@ -292,114 +292,67 @@ def profile_create(request):
 def profile(request):
     
     user=User.objects.get(email=request.user)
-
-    #check filed is created or not
-    if not Seeker_Personal_Information.objects.filter(user=user).exists():
-        return render(request, 'seeker-profile-create.html')
-
-    personal_info=Seeker_Personal_Information.objects.get(user=user)
-    professional_info=Seeker_Professional_Information.objects.get(user=user)
-    education_info=Seeker_Education.objects.get(user=user)
     
-    if request.method == "POST":
-        if user.user_type == "Seeker":
+    if user.user_type =="Seeker":
+        #check filed is created or not
+        if not Seeker_Personal_Information.objects.filter(user=user).exists():
+            return render(request, 'seeker-profile-create.html')
 
-            #professional Summary Field
-            desc= request.POST.get('desc')
-            notice_period= request.POST.get('notice_period')
-            key_skill= request.POST.get('key_skill')
-            project= request.POST.get('project')
-            experience_level= request.POST.get('experience_level')
-            cv= request.FILES.get('cv')
+        personal_info=Seeker_Personal_Information.objects.get(user=user)
+        professional_info=Seeker_Professional_Information.objects.get(user=user)
+        education_info=Seeker_Education.objects.get(user=user)
 
-            #Education Detail
-            clg_course_name= request.POST.get('clg_course_name')
-            clg_specialization= request.POST.get('clg_specialization')
-            clg_name= request.POST.get('clg_name')
-            clg_grading_system= request.POST.get('clg_grading_system')
-            clg_grad= request.POST.get('clg_grad')
-            clg_duration_from= request.POST.get('clg_duration_from')
-            clg_duration_to= request.POST.get('clg_duration_to')
-            _10_school_name= request.POST.get('_10_school_name')
-            _10_grading_system= request.POST.get('_10_grading_system')
-            _10_grad= request.POST.get('_10_grad')
-            _12_school_name= request.POST.get('_12_school_name')
-            _12_specialization= request.POST.get('_12_specialization')
-            _12_grading_system= request.POST.get('_12_grading_system')
-            _12_grad= request.POST.get('_12_grad')
-
-            #Personal Detail
-            dob=request.POST.get('dob')
-            gender=request.POST.get('gender')
-            contact=request.POST.get('contact')
-            profile_pic=request.FILES.get('profile_pic')
-
-            print(dob)
-            print(clg_duration_from)
-            print(clg_duration_to)
-    
-            print(personal_info.dob)
-            print(education_info.clg_duration_from)
-            print(education_info.clg_duration_to)
-
-
-            personal_info.dob=dob
-            personal_info.gender=gender
-            personal_info.contact=contact
-
-            try:
-                personal_info.profile_pic=profile_pic.url
-            except Exception as e:
-                print(e)
-                pass
-            personal_info.save()
-
-            #update education detail
-            education_info.clg_course_name=clg_course_name
-            education_info.clg_specialization=clg_specialization
-            education_info.clg_name=clg_name
-            education_info.clg_grading_system=clg_grading_system
-            education_info.clg_grad=clg_grad
-            education_info.clg_duration_from=clg_duration_from
-            education_info.clg_duration_to=clg_duration_to
-            education_info.st_10_school_name=_10_school_name
-            education_info.st_10_grading_system=_10_grading_system
-            education_info.st_10_grad=_10_grad
-            education_info.st_12_school_name=_12_school_name
-            education_info.st_12_specialization=_12_specialization
-            education_info.st_12_grading_system=_12_grading_system
-            education_info.st_12_grad=_12_grad
-
-            education_info.save()
-
-            # profession information update
-
-            professional_info.desc= desc
-            professional_info.notice_period= notice_period
-            professional_info.key_skill= key_skill
-            professional_info.project= project
-            professional_info.experience_level= experience_level
-            try:
-                professional_info.cv= cv.url
+        if request.method == "POST":
             
-            except:
-                pass
-
+            cv= request.FILES.get('cv')
+            profile_pic=request.FILES.get('profile_pic')
+            personal_info.dob=request.POST.get('dob')
+            personal_info.gender=request.POST.get('gender')
+            personal_info.contact=request.POST.get('contact')
+            if profile_pic is not None:
+            
+                personal_info.profile_pic=profile_pic
+            personal_info.save()
+            #update education detail
+            education_info.clg_course_name=request.POST.get('clg_course_name')
+            education_info.clg_specialization=request.POST.get('clg_specialization')
+            education_info.clg_name=request.POST.get('clg_name')
+            education_info.clg_grading_system=request.POST.get('clg_grading_system')
+            education_info.clg_grad=request.POST.get('clg_grad')
+            education_info.clg_duration_from=request.POST.get('clg_duration_from')
+            education_info.clg_duration_to=request.POST.get('clg_duration_to')
+            education_info.st_10_school_name=request.POST.get('_10_school_name')
+            education_info.st_10_grading_system=request.POST.get('_10_grading_system')
+            education_info.st_10_grad=request.POST.get('_10_grad')
+            education_info.st_12_school_name=request.POST.get('_12_school_name')
+            education_info.st_12_specialization=request.POST.get('_12_specialization')
+            education_info.st_12_grading_system=request.POST.get('_12_grading_system')
+            education_info.st_12_grad=request.POST.get('_12_grad')
+            education_info.save()
+            # profession information update
+            professional_info.desc=request.POST.get('desc')
+            professional_info.notice_period=request.POST.get('notice_period')
+            professional_info.key_skill=request.POST.get('key_skill')
+            professional_info.project=request.POST.get('project')
+            professional_info.experience_level=request.POST.get('experience_level')
+            if cv is not None:
+            
+                professional_info.cv= cv
             professional_info.save()
-
             msg="Profile Update Successfully"
-
             data={  'personal_info':personal_info,
                     'professional_info':professional_info,
                     'education_info':education_info,
                     'msg': msg}
-
             return render(request,'seeker-profile.html',data)
 
     
-    data={  'personal_info':personal_info,
-            'professional_info':professional_info,
-            'education_info':education_info,
-            }
+        data={  'personal_info':personal_info,
+                'professional_info':professional_info,
+                'education_info':education_info,
+                }
 
-    return render(request,'seeker-profile.html',data)
+        return render(request,'seeker-profile.html',data)
+    
+    elif user.user_type =="Company":
+        pass

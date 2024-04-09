@@ -35,7 +35,7 @@
                     <div class="border p-2 d-inline-block mr-3 rounded">
                     <form action="{% url 'profile' %}" method ="POST" enctype='multipart/form-data'>
 
-                      <img src="{{personal_info.profile_pic.url}}" width='150' height='150' alt="Image">
+                      <img src="{{ personal_info.profile_pic.url }}" width='150' height='150' alt="Image">
                     </div>
                     <div>
                       <h2>Product Designer</h2>
@@ -180,7 +180,7 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Upload Resum</label>{{professional_info.cv.name}}
-                  <a href="{{professional_info.cv.url}}" download="your_resume.pdf">Download Resume</a>
+                  <a href="{{ professional_info.cv }}" download="your_resume.pdf">Download Resume</a>
 
                   <input type="file" name="cv" id="fname" class="form-control" accept=".pdf" >
 
