@@ -263,13 +263,13 @@ def profile_create(request):
                 clg_grad=clg_grad,
                 clg_duration_from=clg_duration_from,
                 clg_duration_to=clg_duration_to,
-                _10_school_name=_10_school_name,
-                _10_grading_system=_10_grading_system,
-                _10_grad=_10_grad,
-                _12_school_name=_12_school_name,
-                _12_specialization=_12_specialization,
-                _12_grading_system=_12_grading_system,
-                _12_grad=_12_grad,
+                st_10_school_name=_10_school_name,
+                st_10_grading_system=_10_grading_system,
+                st_10_grad=_10_grad,
+                st_12_school_name=_12_school_name,
+                st_12_specialization=_12_specialization,
+                st_12_grading_system=_12_grading_system,
+                st_12_grad=_12_grad,
 
             )
             Seeker_Professional_Information.objects.create(

@@ -47,14 +47,14 @@ class Seeker_Education(models.Model):
     clg_duration_from= models.DateField(default='2000-01-01')
     clg_duration_to= models.DateField(default='2000-01-01')
 
-    _10_school_name= models.TextField()
-    _10_grading_system= models.TextField(choices=grading_choice)
-    _10_grad=models.TextField()
+    st_10_school_name= models.TextField()
+    st_10_grading_system= models.TextField(choices=grading_choice)
+    st_10_grad=models.TextField()
 
-    _12_school_name= models.TextField()
-    _12_specialization= models.TextField(default=None)
-    _12_grading_system= models.TextField(choices=grading_choice)
-    _12_grad=models.TextField()
+    st_12_school_name= models.TextField()
+    st_12_specialization= models.TextField(default=None)
+    st_12_grading_system= models.TextField(choices=grading_choice)
+    st_12_grad=models.TextField()
     
 
     def __str__(self) -> str:
