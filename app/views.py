@@ -243,7 +243,8 @@ def profile_create(request):
             gender=request.POST.get('gender')
             contact=request.POST.get('contact')
             profile_pic=request.FILES.get('profile_pic')
-
+            addr=request.POST.get('addr')
+            curr_addr=request.POST.get('curr_addr')
 
 
             Seeker_Personal_Information.objects.create(
@@ -252,6 +253,8 @@ def profile_create(request):
                 gender=gender,
                 contact=contact,
                 profile_pic=profile_pic,
+                addr=addr,
+                curr_addr=curr_addr
             )
 
             Seeker_Education.objects.create(
@@ -309,6 +312,9 @@ def profile(request):
             personal_info.dob=request.POST.get('dob')
             personal_info.gender=request.POST.get('gender')
             personal_info.contact=request.POST.get('contact')
+            personal_info.addr=request.POST.get('addr')
+            personal_info.curr_addr=request.POST.get('curr_addr')
+
             if profile_pic is not None:
             
                 personal_info.profile_pic=profile_pic

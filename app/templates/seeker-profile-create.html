@@ -35,13 +35,13 @@
                     <div class="border p-2 d-inline-block mr-3 rounded">
                     <form action="{% url 'profile-create' %}" method ="POST" enctype='multipart/form-data'>
 
-                      <img src="{% static 'images/job_logo_5.jpg'%}" alt="Image">
+                      <img src="{% static 'images/profile_img.jpg'%}" alt="Image" height='150' width='150'>
                     </div>
                     <div>
-                      <h2>Product Designer</h2>
+                      <h2>{{user.first_name}} {{user.last_name}}</h2>
                       <div>
-                        <span class="m-2"><span class="icon-room mr-2"></span>New York City</span>
-                        <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">Full Time</span></span>
+                        <span class="m-2"><span class="icon-room mr-2"></span>India</span>
+                        <span class="m-2"><span class="fa fa-envelope mr-2"></span><span class="text-primary">{{user.email}}</span></span>
                       </div>
                     </div>
                   </div>
@@ -151,6 +151,18 @@
                   <input type="date" id="fname" name="dob" class="form-control" placeholder="Date Of Birth">
                 </div>
               </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Current Address</label>
+                  <input type="text" name="curr_addr" id="fname" class="form-control" placeholder="Current Address" required>
+                </div>
+              </div> 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Address</label>
+                  <input type="text" name="addr" id="fname" class="form-control" placeholder="Address" required>
+                </div>
+              </div> 
 
              
             </div>
@@ -179,11 +191,10 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Other">Other </option>
                   </select>
                 </div>
               </div>

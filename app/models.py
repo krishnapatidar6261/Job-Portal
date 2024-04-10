@@ -23,6 +23,9 @@ class Seeker_Personal_Information(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     dob=models.DateField(default='2000-01-01')
     gender=models.TextField(choices=gender_choice)
+    curr_addr=models.TextField(default="India")
+    addr=models.TextField(default="India")
+    gender=models.TextField(choices=gender_choice)
     contact=models.PositiveIntegerField()
     profile_pic=models.ImageField(upload_to='profile images/',)
 
@@ -38,9 +41,29 @@ class Seeker_Education(models.Model):
         ('Percentage','Percentage'),
         ('GPA','GPA')
     )
+    
+    clg_specialization_choice=(
+            
+            ('Data Science','Data Science'),
+            ('Cybersecurity','Cybersecurity'),
+            ('Web Development','Web Development'),
+            ('Biomedical Engineering','Biomedical Engineering'),
+            ('Biology','Biology'),
+            ('Mathematics','Mathematics'),
+            ('Electrical Engineering','Electrical Engineering'),
+            ('Other','Other'),
+
+    )
+    st_12_specialization_choice=(
+
+        ('Mathematics','Mathematics'),
+        ('Biology','Biology'),
+        ('Commerce','Commerce'),
+        ('Arts','Arts'),
+    )
 
     clg_course_name= models.TextField()
-    clg_specialization= models.TextField(default=None)
+    clg_specialization= models.TextField(default=None,choices=clg_specialization_choice)
     clg_name= models.TextField()
     clg_grading_system= models.TextField(choices=grading_choice)
     clg_grad=models.TextField()
@@ -52,7 +75,7 @@ class Seeker_Education(models.Model):
     st_10_grad=models.TextField()
 
     st_12_school_name= models.TextField()
-    st_12_specialization= models.TextField(default=None)
+    st_12_specialization= models.TextField(default=None,choices=st_12_specialization_choice)
     st_12_grading_system= models.TextField(choices=grading_choice)
     st_12_grad=models.TextField()
     

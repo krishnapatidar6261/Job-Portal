@@ -38,9 +38,9 @@
                       <img src="{{ personal_info.profile_pic.url }}" width='150' height='150' alt="Image">
                     </div>
                     <div>
-                      <h2>Product Designer</h2>
+                      <h2>{{ user.first_name}} {{user.last_name}}</h2>
                       <div>
-                        <span class="m-2"><span class="icon-room mr-2"></span>New York City</span>
+                        <span class="m-2"><span class="icon-room mr-2"></span>{{personal_info.curr_addr}}</span>
                         <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">Full Time</span></span>
                       </div>
                     </div>
@@ -239,6 +239,18 @@
                   <input type="date" id="fname" name="dob"  value="{{ personal_info.dob|date:'Y-m-d' }}" class="form-control" placeholder="Date Of Birth">
                 </div>
               </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Current Address</label>
+                  <input type="text" name="curr_addr"  value="{{personal_info.curr_addr}}" id="fname" class="form-control" placeholder="Current Address" required>
+                </div>
+              </div> 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Address</label>
+                  <input type="text" name="addr" id="fname" value="{{personal_info.addr}}" class="form-control" placeholder="Address" required>
+                </div>
+              </div> 
 
              
             </div>
@@ -267,11 +279,11 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Cybersecurity" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -279,11 +291,11 @@
                     <option value="Cybersecurity" selected>Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Web Development" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -291,11 +303,11 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development" selected>Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Biomedical Engineering" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -303,11 +315,11 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering" selected>Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Biology" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -316,9 +328,9 @@
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
                     <option value="Biology" selected>Biology </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   
                   {% elif education_info.clg_specialization == "Electrical Engineering" %}
@@ -327,10 +339,10 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
+                    <option value="Biology">Biology </option>
                     <option value="Electrical Engineering" selected>Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Mathematics" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -338,11 +350,11 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
+                    <option value="Biology">Biology </option>
                     <option value="Mathematics">Mathematics </option>
                     <option value="Electrical Engineering">Electrical Engineering </option>
                     <option value="Mathematics" selected>Mathematics </option>
-                    <option value="Other ">Other </option>
+                    <option value="Other">Other </option>
                   </select>
                   {% elif education_info.clg_specialization == "Other" %}
                   <select  name="clg_specialization"  class="form-control" required>
@@ -350,10 +362,10 @@
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Biomedical Engineering">Biomedical Engineering</option>
-                    <option value="Biology ">Biology </option>
-                    <option value="Mathematics ">Mathematics </option>
-                    <option value="Electrical Engineering ">Electrical Engineering </option>
-                    <option value="Mathematics ">Mathematics </option>
+                    <option value="Biology">Biology </option>
+                    <option value="Mathematics">Mathematics </option>
+                    <option value="Electrical Engineering">Electrical Engineering </option>
+                    <option value="Mathematics">Mathematics </option>
                     <option value="Other" selected>Other</option>
                   </select>
                   {% endif %}
