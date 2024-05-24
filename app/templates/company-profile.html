@@ -1,0 +1,183 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>JobBoard &mdash; Website Template by Colorlib</title>
+    <meta charset="utf-8">
+  
+  </head>
+  <body id="top">
+
+      <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('{% static 'images/hero_1.jpg'%}');" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">Complete Your Profile</h1>
+            <div class="custom-breadcrumbs">
+              <a href="#">Home</a> <span class="mx-2 slash">/</span>
+              <span class="text-white"><strong>Profile </strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <div class="container">
+        <section class="site-section">
+            <div class="container">
+              <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                  <div class="d-flex align-items-center">
+                    <div class="border p-2 d-inline-block mr-3 rounded">
+                    <form action="{% url 'profile' %}" method ="POST" enctype='multipart/form-data'>
+
+                      <img src="{{ comp_prof.c_logo.url }}" alt="Image" height='150' width='150'>
+                    </div>
+                    <div>
+                      <h2>{{user.first_name}} {{user.last_name}}</h2>
+                      <div>
+                        <span class="m-2"><span class="icon-room mr-2"></span>{{comp_prof.c_addr}}</span>
+                        <span class="m-2"><span class="fa fa-envelope mr-2"></span><span class="text-primary">{{user.email}}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="row">
+                    <div class="col-6">
+                        <input type="file" name="c_logo" accept="image/*" >
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+        <div class="row">
+          <div class="col-lg-6 mb-5 p-4 border rounded">
+            <h2 class="mb-4">Professional Summary</h2>
+              
+              {% csrf_token %}
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="message">About Company</label> 
+                  <textarea name="c_desc"  id="message" cols="30" rows="3" class="form-control" placeholder="Write your Summary here..." required>{{ comp_prof.c_desc }}</textarea>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Company Category</label>
+                  {% if comp_prof.company_category == "Education" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education" seleted>Education</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                    <option value="Finance and Banking">Finance and Banking</option>
+                    <option value="Consulting and Professional Services">Consulting and Professional Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif comp_prof.company_category == "Pharmaceutical" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education" >Education</option>
+                    <option value="Pharmaceutical" seleted>Pharmaceutical</option>
+                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                    <option value="Finance and Banking">Finance and Banking</option>
+                    <option value="Consulting and Professional Services">Consulting and Professional Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif comp_prof.company_category == "Information Technology (IT)" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education">Education</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Information Technology (IT)" seleted>Information Technology (IT)</option>
+                    <option value="Finance and Banking">Finance and Banking</option>
+                    <option value="Consulting and Professional Services">Consulting and Professional Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif comp_prof.company_category == "Finance and Banking" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education">Education</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                    <option value="Finance and Banking" seleted>Finance and Banking</option>
+                    <option value="Consulting and Professional Services">Consulting and Professional Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif comp_prof.company_category == "Consulting and Professional Services" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education">Education</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                    <option value="Finance and Banking">Finance and Banking</option>
+                    <option value="Consulting and Professional Services" seleted>Consulting and Professional Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {% elif comp_prof.company_category == "Other" %}
+                  <select  name="company_category"  class="form-control" required>
+                    <option value="Education">Education</option>
+                    <option value="Pharmaceutical">Pharmaceutical</option>
+                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                    <option value="Finance and Banking">Finance and Banking</option>
+                    <option value="Consulting and Professional Services">Consulting and Professional Services</option>
+                    <option value="Other" seleted >Other</option>
+                  </select>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Company Name</label>
+                  <input type="text" name="cname" id="fname" value="{{user.first_name}} {{user.last_name}}" class="form-control" placeholder="Company Name" required>
+                </div>
+              </div> 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Company Contact</label>
+                  <input type="number" name="company_contact" value="{{comp_prof.company_contact}}"id="fname" class="form-control" placeholder="Company Contact" required>
+                </div>
+              </div> 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Website</label>
+                  <input type="text" name="c_link" value="{{comp_prof.c_link}}" id="fname" class="form-control" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Address</label>
+                  <input type="text" name="c_addr" id="fname" value="{{comp_prof.c_addr}}" class="form-control" placeholder="Address" required>
+                </div>
+              </div> 
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Country Name</label>
+                  <input type="text" name="country_name" value="{{comp_prof.country_name}}" id="fname" class="form-control" placeholder="Country Name" required>
+                </div>
+              </div>
+              
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Done" class="btn px-4 btn-primary text-white">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </section>
+    
+   
+  </div>
+
+   
+   
+     
+  </body>
+</html>
+{% endblock %}

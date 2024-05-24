@@ -113,3 +113,28 @@ class Seeker_Professional_Information(models.Model):
     
     def __str__(self) -> str:
         return self.user.username
+    
+class Comapny_Profile(models.Model):
+
+    company_category_choice=(
+        ('Education','Education'),
+        ('Pharmaceutical','Pharmaceutical'),
+        ('Information Technology (IT)','Information Technology (IT)'),
+        ('Finance and Banking','Finance and Banking'),
+        ('Consulting and Professional Services','Consulting and Professional Services'),
+        ('Other','Other'),
+
+    )
+
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    c_logo=models.ImageField(upload_to="company_logo/")
+    cname=models.TextField()
+    company_contact=models.TextField()
+    company_category=models.TextField(choices=company_category_choice)
+    c_desc=models.TextField()
+    c_link=models.URLField(max_length=200)
+    c_addr=models.TextField()
+    country_name=models.TextField()
+
+    def __str__(self) -> str:
+        return self.user.username

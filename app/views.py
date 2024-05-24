@@ -9,7 +9,6 @@ import random
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import *
-from itertools import chain
 
 #we use Additionally Filed so we need to import and naming as usermodel
 User = get_user_model()
@@ -93,8 +92,12 @@ def login(request):
                 return render(request,'index.html')
             
             elif user.user_type == "Company":
-                return render(request,'HR-profile.html')
+                user_instance=User.objects.get(email=request.user)
                 
+                if not Comapny_Profile.objects.filter(user=user).exists():
+                    return render(request,'company-profile-create.html')
+                
+                return render(request, 'index.html')
             
             return render(request, 'index.html')
 
@@ -211,10 +214,9 @@ def change_password(request):
 def profile_create(request):
     
     user=User.objects.get(email=request.user)
-    if request.method == "POST":
-        if user.user_type == "Seeker":
-
-            #professional Summary Field
+    if user.user_type == "Seeker":
+        if request.method == "POST":
+        #professional Summary Field
             desc= request.POST.get('desc')
             notice_period= request.POST.get('notice_period')
             key_skill= request.POST.get('key_skill')
@@ -287,11 +289,30 @@ def profile_create(request):
 
             return render(request,'index.html')
         
-        else:
-            return render(request,'HR-profile.html')
-        
-    return render(request, 'seeker-profile-create.html')
+        return render(request, 'seeker-profile-create.html')
     
+    elif user.user_type == "Company":
+
+        if request.method == "POST":
+            print(request.POST.get('cname'))
+            Comapny_Profile.objects.create(
+
+                user = user,
+                c_logo = request.FILES.get('c_logo'),
+                cname = request.POST.get('cname'),
+                company_contact = request.POST.get('company_contact'),
+                company_category = request.POST.get('company_category'),
+                c_desc = request.POST.get('c_desc'),
+                c_link = request.POST.get('c_link'),
+                c_addr = request.POST.get('c_addr'),
+                country_name = request.POST.get('country_name'),
+            )
+
+            return render(request,'index.html')
+
+        return render(request,'company-profile-create.html')
+    
+@login_required(login_url="/login/")   
 def profile(request):
     
     user=User.objects.get(email=request.user)
@@ -361,4 +382,31 @@ def profile(request):
         return render(request,'seeker-profile.html',data)
     
     elif user.user_type =="Company":
-        pass
+        
+        if not Comapny_Profile.objects.filter(user=user).exists():
+
+            return render(request,'company-profile-create.html')
+        
+        comp_prof=Comapny_Profile.objects.get(user=user)
+
+        if request.method == "POST":
+
+            c_logo = request.FILES.get('c_logo')
+            
+           
+            comp_prof.cname = request.POST.get('cname')
+            comp_prof.company_contact = request.POST.get('company_contact')
+            comp_prof.company_category = request.POST.get('company_category')
+            comp_prof.c_desc = request.POST.get('c_desc')
+            comp_prof.c_link = request.POST.get('c_link')
+            comp_prof.c_addr = request.POST.get('c_addr')
+            comp_prof.country_name = request.POST.get('country_name')
+
+            if c_logo is not None:
+                comp_prof.c_logo = c_logo
+            
+            print("exceute")
+            return render(request,'index.html')
+
+        
+        return render(request,"company-profile.html",{'comp_prof':comp_prof})

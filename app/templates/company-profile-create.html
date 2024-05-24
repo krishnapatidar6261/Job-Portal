@@ -86,10 +86,15 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Company Name</label>
-                  <input type="text" name="c_name" id="fname" class="form-control" placeholder="Company Name" required>
+                  <input type="text" name="cname" id="fname" value="{{user.first_name}} {{user.last_name}}" class="form-control" placeholder="Company Name" required>
                 </div>
               </div> 
-             
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Company Contact</label>
+                  <input type="number" name="company_contact" id="fname" class="form-control" placeholder="Company Contact" required>
+                </div>
+              </div> 
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Website</label>
